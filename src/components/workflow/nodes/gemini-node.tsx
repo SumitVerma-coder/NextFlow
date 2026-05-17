@@ -1,31 +1,53 @@
-import { Handle, Position } from "@xyflow/react";
+import { Handle, Position, type NodeProps } from "@xyflow/react";
 import { Sparkles } from "lucide-react";
 
-export function GeminiNode() {
+export function GeminiNode({ data, selected }: NodeProps) {
+  const nodeData = data as {
+    label?: string;
+    description?: string;
+    config?: {
+      model?: string;
+      systemPrompt?: string;
+      prompt?: string;
+    };
+  };
+
+  const config = nodeData.config ?? {};
+
   return (
-    <div className="w-72 rounded-3xl border border-neutral-200 bg-white p-4 shadow-sm">
-      <div className="mb-4 flex items-center gap-3">
+    <div
+      className={`w-60 rounded-2xl border bg-white p-4 shadow-sm transition ${
+        selected
+          ? "border-neutral-900 ring-4 ring-neutral-900/10"
+          : "border-neutral-200"
+      }`}
+    >
+      <div className="mb-3 flex items-center gap-3">
         <div className="flex h-9 w-9 items-center justify-center rounded-2xl bg-neutral-100">
           <Sparkles className="h-4 w-4 text-neutral-700" />
         </div>
 
         <div>
           <h3 className="text-sm font-semibold text-neutral-900">
-            Gemini 3.1 Pro
+            {nodeData.label ?? "Gemini 3.1 Pro"}
           </h3>
-          <p className="text-xs text-neutral-500">Prompt + vision model</p>
+          <p className="text-xs text-neutral-500">
+            {nodeData.description ?? "Prompt + vision model"}
+          </p>
         </div>
       </div>
 
       <div className="space-y-2 text-xs">
         <div className="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2">
-          System prompt
+          {config.model ?? "gemini-2.5-flash"}
         </div>
-        <div className="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2">
-          User prompt
+
+        <div className="line-clamp-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2">
+          {config.systemPrompt || "System prompt"}
         </div>
-        <div className="rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2">
-          Image input optional
+
+        <div className="line-clamp-2 rounded-xl border border-neutral-200 bg-neutral-50 px-3 py-2">
+          {config.prompt || "User prompt"}
         </div>
       </div>
 

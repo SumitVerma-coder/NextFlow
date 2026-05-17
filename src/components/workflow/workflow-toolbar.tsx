@@ -9,7 +9,7 @@ export function WorkflowToolbar({ onAddNode }: WorkflowToolbarProps) {
     <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1 rounded-2xl border border-neutral-200 bg-white/95 p-1.5 shadow-xl backdrop-blur">
       <button
         onClick={() => onAddNode("requestInputs")}
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
+        className="cursor-pointer inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
       >
         <FileInput className="h-4 w-4" />
         Inputs
@@ -17,7 +17,7 @@ export function WorkflowToolbar({ onAddNode }: WorkflowToolbarProps) {
 
       <button
         onClick={() => onAddNode("cropImage")}
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
+        className=" cursor-pointer inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
       >
         <Crop className="h-4 w-4" />
         Crop
@@ -25,7 +25,7 @@ export function WorkflowToolbar({ onAddNode }: WorkflowToolbarProps) {
 
       <button
         onClick={() => onAddNode("gemini")}
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
+        className="cursor-pointer inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
       >
         <Sparkles className="h-4 w-4" />
         Gemini
@@ -33,7 +33,7 @@ export function WorkflowToolbar({ onAddNode }: WorkflowToolbarProps) {
 
       <button
         onClick={() => onAddNode("response")}
-        className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
+        className="cursor-pointer inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs font-medium text-neutral-700 transition hover:bg-neutral-100"
       >
         <MessageSquare className="h-4 w-4" />
         Response

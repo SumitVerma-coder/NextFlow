@@ -33,7 +33,7 @@ export async function GET() {
   });
 }
 
-export async function POST() {
+export async function POST(req: Request) {
   const { userId } = await auth();
 
   if (!userId) {
@@ -43,12 +43,15 @@ export async function POST() {
     );
   }
 
+  const body = await req.json().catch(() => ({}));
+
   const workflow = await prisma.workflow.create({
     data: {
       userId,
-      name: DEFAULT_WORKFLOW_NAME,
-      nodes: [],
-      edges: [],
+      name: body.name || DEFAULT_WORKFLOW_NAME,
+      nodes: body.nodes ?? [],
+      edges: body.edges ?? [],
+      isSample: body.isSample ?? false,
     },
   });
 

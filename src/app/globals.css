@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 html,
 body {
   height: 100%;
@@ -8,6 +10,11 @@ body {
 body {
   background: #f7f7f6;
   color: #171717;
+}
+
+.dark body {
+  background: #0a0a0a;
+  color: #ededed;
 }
 
 .react-flow__node {
@@ -22,6 +29,16 @@ body {
   stroke: #8f8f89;
 }
 
+.dark .react-flow__edge-path {
+  stroke: #6b7280;
+}
+
 .react-flow__controls-button {
   border-bottom: 1px solid #e5e5e5 !important;
+}
+
+.dark .react-flow__controls-button {
+  background: #171717 !important;
+  color: #ededed !important;
+  border-bottom: 1px solid #262626 !important;
 }

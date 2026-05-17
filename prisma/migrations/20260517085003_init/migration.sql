@@ -15,6 +15,7 @@ CREATE TABLE "Workflow" (
     "status" "WorkflowStatus" NOT NULL DEFAULT 'DRAFT',
     "nodes" JSONB NOT NULL DEFAULT '[]',
     "edges" JSONB NOT NULL DEFAULT '[]',
+    "isSample" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

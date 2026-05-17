@@ -34,6 +34,26 @@ export default function DashboardPage() {
     }
   }
 
+  async function createSampleWorkflow() {
+  try {
+    setCreating(true);
+
+    const res = await fetch("/api/workflows/sample", {
+      method: "POST",
+    });
+
+    const data = await res.json();
+
+    if (data.workflow?.id) {
+      router.push(`/workflow/${data.workflow.id}`);
+    }
+  } catch (error) {
+    console.error("Failed to create sample workflow:", error);
+  } finally {
+    setCreating(false);
+  }
+}
+
   async function createWorkflow() {
     try {
       setCreating(true);
@@ -70,15 +90,24 @@ export default function DashboardPage() {
               Create, edit, and run your AI workflows.
             </p>
           </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={createSampleWorkflow}
+                disabled={creating}
+                className="rounded-xl border border-neutral-200 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                Use Sample
+              </button>
 
-          <button
-            onClick={createWorkflow}
-            disabled={creating}
-            className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            <Plus className="h-4 w-4" />
-            {creating ? "Creating..." : "New Workflow"}
-          </button>
+              <button
+                onClick={createWorkflow}
+                disabled={creating}
+                className="inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                <Plus className="h-4 w-4" />
+                {creating ? "Creating..." : "New Workflow"}
+              </button>
+            </div>
         </div>
 
         {loading ? (
@@ -96,6 +125,7 @@ export default function DashboardPage() {
                 name={workflow.name}
                 status={workflow.status}
                 updatedAt={workflow.updatedAt}
+                onDeleted={loadWorkflows}
               />
             ))}
           </div>
